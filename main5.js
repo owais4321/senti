@@ -2,20 +2,21 @@ const puppeteer = require('puppeteer');
 // const fs = require('fs/promises');
 const fs = require("fs");
 const readline = require("readline");
-
+const stream = fs.createReadStream("sentences.txt");
+const rl = readline.createInterface({ input: stream });
+let data = [];
+ 
+rl.on("line", (row) => {
+    data.push(row);
+});
+ 
+rl.on("close", () => {
+     console.log(data);
+}).then(()=>{
+    console.log("test")
+})
 
   (async () => {
-    let data = [];
-    const stream = fs.createReadStream("sentences.txt");
-    const rl = readline.createInterface({ input: stream }); 
-    await rl.on("line", (row) => {
-        data.push(row);
-    });
-     
-    await rl.on("close", () => {
-         console.log(data);
-    });
-    
     let sentiment = []
     console.log(data.length);
     for(let i=0;i<data.length;i++){
