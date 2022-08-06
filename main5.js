@@ -11,14 +11,14 @@ rl.on("line", (row) => {
 });
  
 rl.on("close", () => {
-    console.log(data);
+    // console.log(data);
 });
 
   (async () => {
     let sentiment = []
     for(let i=0;i<data.length;i++){
     let singlesentiment = []
-    const browser = await puppeteer.launch({headless:false});
+    const browser = await puppeteer.launch({headless:true});
     const page = await browser.newPage();
     await page.goto('https://sindhinlp.com/sentiment.php',{waitUntil: 'networkidle2'});
     await page.type(".mytextarea",data[i]);
