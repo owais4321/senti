@@ -32,8 +32,8 @@ rl.on("close", () => {
             let n = await page.$$eval(".text-success",
             elements=> elements.map(item=>item.textContent))
             // })
-        // console.log(p)
-        // console.log(n)
+        console.log(p)
+        console.log(n)
         singlesentiment.push(p[0])
         singlesentiment.push(n[0])
         sentiment.push(singlesentiment)  
