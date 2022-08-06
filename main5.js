@@ -38,5 +38,6 @@ rl.on("close", () => {
     sentiment.push(singlesentiment)  
     await browser.close();
     }
+    console.log("test");
     console.log(sentiment)
 })();
