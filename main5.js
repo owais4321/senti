@@ -11,36 +11,35 @@ rl.on("line", (row) => {
 });
  
 rl.on("close", () => {
-     console.log(data);
-}).then(()=>{
-    console.log("test")
+    //  console.log(data);
+    (async () => {
+        let sentiment = []
+        console.log(data.length);
+        for(let i=0;i<data.length;i++){
+        let singlesentiment = []
+        const browser = await puppeteer.launch({headless:true,args: ['--no-sandbox']});
+        const page = await browser.newPage();
+        await page.goto('https://sindhinlp.com/sentiment.php',{waitUntil: 'networkidle2'},);
+        await page.type(".mytextarea",data[i]);
+        await page.click("#submit")
+        await page.waitForSelector('b')
+        // console.log(page.url())
+        // await page.on('requestfinished',()=>{
+            let p = await page.$$eval(".text-warning",
+            elements=> elements.map(item=>item.textContent))
+            let n = await page.$$eval(".text-success",
+            elements=> elements.map(item=>item.textContent))
+            // })
+        // console.log(p)
+        // console.log(n)
+        singlesentiment.push(p[0])
+        singlesentiment.push(n[0])
+        sentiment.push(singlesentiment)  
+        await browser.close();
+        }
+        console.log("test");
+        console.log(sentiment)
+    })();
 })
 
-  (async () => {
-    let sentiment = []
-    console.log(data.length);
-    for(let i=0;i<data.length;i++){
-    let singlesentiment = []
-    const browser = await puppeteer.launch({headless:true,args: ['--no-sandbox']});
-    const page = await browser.newPage();
-    await page.goto('https://sindhinlp.com/sentiment.php',{waitUntil: 'networkidle2'},);
-    await page.type(".mytextarea",data[i]);
-    await page.click("#submit")
-    await page.waitForSelector('b')
-    // console.log(page.url())
-    // await page.on('requestfinished',()=>{
-        let p = await page.$$eval(".text-warning",
-        elements=> elements.map(item=>item.textContent))
-        let n = await page.$$eval(".text-success",
-        elements=> elements.map(item=>item.textContent))
-        // })
-    // console.log(p)
-    // console.log(n)
-    singlesentiment.push(p[0])
-    singlesentiment.push(n[0])
-    sentiment.push(singlesentiment)  
-    await browser.close();
-    }
-    console.log("test");
-    console.log(sentiment)
-})();
+  
