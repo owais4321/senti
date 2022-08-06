@@ -16,6 +16,7 @@ rl.on("close", () => {
 
   (async () => {
     let sentiment = []
+    console.log("see");
     for(let i=0;i<data.length;i++){
     let singlesentiment = []
     const browser = await puppeteer.launch({headless:true,args: ['--no-sandbox']});
