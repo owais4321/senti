@@ -16,7 +16,7 @@ rl.on("close", () => {
 
   (async () => {
     let sentiment = []
-    for(let i=0;i<3;i++){
+    for(let i=0;i<data.length;i++){
     let singlesentiment = []
     const browser = await puppeteer.launch({headless:false});
     const page = await browser.newPage();
