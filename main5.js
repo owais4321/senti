@@ -18,9 +18,9 @@ rl.on("close", () => {
     let sentiment = []
     for(let i=0;i<data.length;i++){
     let singlesentiment = []
-    const browser = await puppeteer.launch({headless:true});
+    const browser = await puppeteer.launch({headless:true,args: ['--no-sandbox']});
     const page = await browser.newPage();
-    await page.goto('https://sindhinlp.com/sentiment.php',{waitUntil: 'networkidle2'});
+    await page.goto('https://sindhinlp.com/sentiment.php',{waitUntil: 'networkidle2'},);
     await page.type(".mytextarea",data[i]);
     await page.click("#submit")
     await page.waitForSelector('b')
