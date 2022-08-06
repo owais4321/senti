@@ -4,14 +4,14 @@ const fs = require("fs");
 const readline = require("readline");
 const stream = fs.createReadStream("sentences.txt");
 const rl = readline.createInterface({ input: stream });
-let data = [];
+data = [];
  
 rl.on("line", (row) => {
     data.push(row);
 });
  
 rl.on("close", () => {
-    // console.log(data);
+     console.log(data);
 });
 
   (async () => {
