@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 // const fs = require('fs/promises');
 const fs = require("fs");
 const readline = require("readline");
+const console = require('console');
 const stream = fs.createReadStream("sentences.txt");
 const rl = readline.createInterface({ input: stream });
 let data = [];
@@ -16,6 +17,7 @@ rl.on("close", () => {
         let sentiment = []
         console.log(data.length);
         for(let i=0;i<data.length;i++){
+        console.log(i);
         let singlesentiment = []
         const browser = await puppeteer.launch({headless:true,args: ['--no-sandbox']});
         const page = await browser.newPage();
