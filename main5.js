@@ -39,8 +39,14 @@ rl.on("close", () => {
         sentiment.push(singlesentiment)  
         await browser.close();
         }
-        console.log("test");
-        console.log(sentiment)
+        const file = fs.createWriteStream('array.txt');
+        file.on('error', (err) => {
+        /* error handling */
+        });
+        sentiment.forEach((v) => {
+        file.write(v.join(', ') + '\n');
+        });
+        file.end();
     })();
 })
 
